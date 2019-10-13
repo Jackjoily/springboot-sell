@@ -11,7 +11,7 @@ import javax.persistence.Id;
 /**
  * @author jackjoily
  * @time ${Date}
- * @Description
+ * @Description  商品种类表
  **/
 @Entity
 @Data
@@ -22,7 +22,6 @@ public class ProductCategory {
     private Integer categoryId;
     private String categoryName;
     private Integer categoryType;
-
     public ProductCategory(String categoryName, Integer categoryType) {
         this.categoryName = categoryName;
         this.categoryType = categoryType;

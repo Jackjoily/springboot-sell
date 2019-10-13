@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author jackjoily
  * @time ${Date}
- * @Description
+ * @Description 订单主表
  **/
 @Entity
 @Data

@@ -1,7 +1,10 @@
 package com.jack.sell.service.impl;
 
 import com.jack.sell.dataobject.ProductInfo;
+import com.jack.sell.dto.CartDto;
 import com.jack.sell.enums.ProductStatusEnum;
+import com.jack.sell.enums.ResultEnum;
+import com.jack.sell.exception.SellException;
 import com.jack.sell.repository.ProductInfoRepository;
 import com.jack.sell.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -47,5 +51,37 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return repository.save(productInfo);
+    }
+
+    @Override
+    @Transactional
+    public void increaseStock(List<CartDto> cartDtoList) {
+        for (CartDto cartDto : cartDtoList) {
+            ProductInfo productInfo = repository.findById(cartDto.getProductId()).get();
+            if (productInfo == null) {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXISTS);
+            }
+            Integer result = productInfo.getProductStock() + cartDto.getProductQuantity();
+            productInfo.setProductStock(result);
+            repository.save(productInfo);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void decreaseStock(List<CartDto> cartDtoList) {
+        for (CartDto cartDto : cartDtoList) {
+            ProductInfo productInfo = repository.findById(cartDto.getProductId()).get();
+            if (productInfo == null) {
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXISTS);
+            }
+            Integer result = productInfo.getProductStock() - cartDto.getProductQuantity();
+            if (result < 0) {
+                throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
+            }
+            productInfo.setProductStock(result);
+            repository.save(productInfo);
+        }
+
     }
 }

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * @author jackjoily
  * @time ${Date}
- * @Description
+ * @Description 订单详情表
  **/
 @Entity
 @Data
