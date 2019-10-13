@@ -1,4 +1,4 @@
-package com.jack.sell.service;
+package com.jack.sell.service.impl;
 
 import com.jack.sell.dataobject.ProductCategory;
 import com.jack.sell.service.impl.CategoryServiceImpl;
@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
  **/
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CategoryServiceTest {
+public class CategoryServiceImplTest {
     @Autowired
     private CategoryServiceImpl categoryService;
     @Test
