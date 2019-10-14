@@ -1,8 +1,12 @@
 package com.jack.sell.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jack.sell.dataobject.OrderDetail;
+import com.jack.sell.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +16,7 @@ import java.util.List;
  * @Description
  **/
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDto {
     private String orderId;
 
@@ -35,8 +40,10 @@ public class OrderDto {
      */
     private Integer payStatus;
     //创建时间
+    @JsonSerialize(using= Date2LongSerializer.class)
     private Date create_time;
     //更新时间
+    @JsonSerialize(using= Date2LongSerializer.class)
     private Date update_time;
     private List<OrderDetail> orderDetailList;
 }

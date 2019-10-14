@@ -3,6 +3,7 @@ package com.jack.sell.service.impl;
 import com.jack.sell.dataobject.OrderDetail;
 import com.jack.sell.dto.OrderDto;
 import com.jack.sell.enums.OrderStatysEnums;
+import com.jack.sell.enums.PayStatusEnum;
 import com.jack.sell.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -32,7 +33,7 @@ public class OrderServiceImplTest {
     @Autowired
     private OrderServiceImpl orderService;
     private final String buyerOpenId = "110110";
-    private final String ORDER_ID = "1570963209550203629";
+    private final String ORDER_ID = "1570963138724439831";
 
     @Test
     public void crearte() {
@@ -71,16 +72,22 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() {
-        OrderDto one = orderService.findOne("1570963209550203629");
+        OrderDto one = orderService.findOne("1570963138724439831");
         OrderDto cancel = orderService.cancel(one);
         assertEquals(OrderStatysEnums.CANCEL.getCode(),cancel.getOrderStatus());
     }
 
     @Test
     public void finsh() {
+        OrderDto one = orderService.findOne(ORDER_ID);
+        OrderDto finsh = orderService.finsh(one);
+        assertEquals(OrderStatysEnums.FINSHED.getCode(),finsh.getOrderStatus());
     }
 
     @Test
     public void paid() {
+        OrderDto one = orderService.findOne(ORDER_ID);
+        OrderDto paid = orderService.paid(one);
+        assertEquals(PayStatusEnum.SUCCESS.getCode(),paid.getPayStatus());
     }
 }

@@ -1,5 +1,6 @@
 package com.jack.sell.VO;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 /**
@@ -10,6 +11,7 @@ import lombok.Data;
  * @Description
  **/
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultVo<T> {
     private Integer code;
     private String msg;

@@ -16,8 +16,7 @@ public class ResultVoUtils {
         return resultVo;
     }
 
-    public static ResultVo success() {
-
+    public static ResultVo successs() {
         return successs(null);
     }
 

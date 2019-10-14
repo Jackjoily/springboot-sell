@@ -27,26 +27,32 @@
         </rollingPolicy>
     </appender>
 
-    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>ERROR</level>
-        </filter>
-        <layout class="ch.qos.logback.classic.PatternLayout">
-            <pattern>
-                %msg%n
-            </pattern>
-        </layout>
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
             <fileNamePattern>
                 E:/ideaProject/log/sell/error.%d.log
             </fileNamePattern>
         </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern> %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+        <!--日志文件最大的大小-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+        <!-- 所有error日志都在这里-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
     </appender>
-
 
     <root level="info">
         <appender-ref ref="consoleLog"/>
         <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="error"/>
     </root>
 </configuration>
