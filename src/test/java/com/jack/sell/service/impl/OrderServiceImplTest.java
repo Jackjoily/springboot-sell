@@ -45,7 +45,7 @@ public class OrderServiceImplTest {
         //购物车
         List<OrderDetail> orderDetailList = new ArrayList<>();
         OrderDetail o1 = new OrderDetail();
-        o1.setProductId("123458");
+        o1.setProductId("123456");
         o1.setProductQuantity(1);
         OrderDetail o2 = new OrderDetail();
         o2.setProductId("123457");
@@ -90,4 +90,12 @@ public class OrderServiceImplTest {
         OrderDto paid = orderService.paid(one);
         assertEquals(PayStatusEnum.SUCCESS.getCode(),paid.getPayStatus());
     }
+    @Test
+    public void list() {
+        PageRequest pageRequest=PageRequest.of(0, 2);
+        Page<OrderDto> list = orderService.findList(pageRequest);
+        assertNotEquals(0, list.getTotalElements());
+
+    }
+
 }

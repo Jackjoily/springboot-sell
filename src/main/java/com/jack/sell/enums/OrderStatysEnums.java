@@ -8,7 +8,7 @@ import lombok.Getter;
  * @Description
  **/
 @Getter
-public enum  OrderStatysEnums {
+public enum  OrderStatysEnums implements CodeEnum {
 NEW(0,"新订单"),
 FINSHED(1,"完结"),
 CANCEL(2,"已取消");

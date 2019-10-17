@@ -138,7 +138,6 @@ public class OrderServiceImpl implements OrderService {
         productService.increaseStock(cartDtoList);
         //如果已支付，需要退款
         if (orderDto.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
-            //TODO
         }
         return orderDto;
     }
@@ -191,4 +190,14 @@ public class OrderServiceImpl implements OrderService {
         }
         return orderDto;
     }
+
+    @Override
+    public Page<OrderDto> findList(Pageable pageable) {
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findAll(pageable);
+        List<OrderDto> orderDtolist = OrderMaster2OrderDtoConverter.convert(orderMasterPage.getContent());
+        Page<OrderDto> orderDtoPage = new PageImpl<>(orderDtolist, pageable, orderMasterPage.getTotalElements());
+        return orderDtoPage;
+    }
+
+
 }

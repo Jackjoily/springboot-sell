@@ -10,6 +10,7 @@ import com.jack.sell.dto.OrderDto;
 import com.jack.sell.enums.ResultEnum;
 import com.jack.sell.exception.SellException;
 import com.jack.sell.form.OrderForm;
+import com.jack.sell.service.BuyerService;
 import com.jack.sell.service.CategoryService;
 import com.jack.sell.service.OrderService;
 import com.jack.sell.service.ProductService;
@@ -46,6 +47,9 @@ public class BuyerOrderController {
     private CategoryService categoryService;
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private BuyerService buyerService;
 
     //创建订单
     @PostMapping("/create")
@@ -88,10 +92,9 @@ public class BuyerOrderController {
     @GetMapping("/detail")
     public ResultVo<OrderDto> detail(
             @RequestParam("openid") String openid,
-            @RequestParam("orderid") String orderId
+            @RequestParam("orderId") String orderId
     ) {
-        //TODO 不安全的做法，改进
-        OrderDto orderDto = orderService.findOne(orderId);
+        OrderDto orderDto = buyerService.findOrderOne(openid, orderId);
         return ResultVoUtils.successs(orderDto);
     }
 
@@ -101,9 +104,7 @@ public class BuyerOrderController {
             @RequestParam("openid") String openid,
             @RequestParam("orderid") String orderId
     ) {
-        //TODO 不安全的做法，改进
-        OrderDto orderDto = orderService.findOne(orderId);
-        orderService.cancel(orderDto);
+        buyerService.cancelOrder(openid, orderId);
         return ResultVoUtils.successs();
     }
 }

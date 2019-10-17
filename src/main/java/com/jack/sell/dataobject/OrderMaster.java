@@ -45,10 +45,10 @@ public class OrderMaster {
     private Integer payStatus = PayStatusEnum.WAIT.getCode();
     //创建时间
     @JsonSerialize(using= Date2LongSerializer.class)
-    private Date create_time;
+    private Date createTime;
     //更新时间
     @JsonSerialize(using= Date2LongSerializer.class)
-    private Date update_time;
+    private Date updateTime;
 
 
 }

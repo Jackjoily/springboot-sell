@@ -60,4 +60,12 @@ public class ProductServiceImplTest {
         ProductInfo save = service.save(productInfo);
         assertNotEquals(null, save);
     }
+    @Test
+    public  void onSale(){
+        service.onSale("123452");
+    }
+    @Test
+    public  void offSale(){
+        service.offSale("123452");
+    }
 }

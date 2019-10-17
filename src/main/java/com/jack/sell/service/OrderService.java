@@ -1,6 +1,7 @@
 package com.jack.sell.service;
 
 import com.jack.sell.dataobject.OrderMaster;
+import com.jack.sell.dataobject.ProductInfo;
 import com.jack.sell.dto.OrderDto;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ public interface OrderService {
      * 创建订单
      */
     OrderDto crearte(OrderDto orderDto);
+
     /**
      * 查询dange订单
      */
@@ -37,5 +39,15 @@ public interface OrderService {
      * 支付订单
      */
     OrderDto paid(OrderDto orderDto);
+
+    /**
+     * 分页查询所有订单
+     *
+     * @param pageable
+     * @return
+     */
+    Page<OrderDto> findList(Pageable pageable);
+
+
 
 }
