@@ -13,22 +13,13 @@
                         <thead>
                         <tr>
                             <th>
-                                商品Id
+                                类目Id
                             </th>
                             <th>
                                 名称
                             </th>
                             <th>
-                                单价
-                            </th>
-                            <th>
-                                图片
-                            </th>
-                            <th>
-                                描述
-                            </th>
-                            <th>
-                                类目
+                                type
                             </th>
                             <th>
                                 创建时间
@@ -42,50 +33,32 @@
                         </tr>
                         </thead>
                         <tbody>
-                <#list pageLists.content as product>
+                <#list categoryList.content as category>
                 <br>
                 <tr class="success">
                     <td>
-                        ${product.productId}
+                        ${category.categoryId}
                     </td>
                     <td>
-                        ${product.productName}
+                        ${category.categoryName}
                     </td>
                     <td>
-                        ${product.productPrice}
+                        ${category.categoryType}
                     </td>
                     <td>
-                        <img style="height:35px;width:35px" src=" ${product.productIcon}"/>
+                        ${category.createTime}
                     </td>
                     <td>
-                        ${product.productDescription}
+                        ${category.updateTime}
                     </td>
                     <td>
-                        ${product.categoryType}
-                    </td>
-
-                    <td>
-                        ${product.createTime}
-                    </td>
-                    <td>
-                        ${product.updateTime}
-                    </td>
-                    <td>
-                        <a href="/sell/seller/product/index?productId=${product.productId}">修改</a>
-                    </td>
-                    <td>
-                    <#if product.getProductStatusEnum().message=="在架">
-                        <a href="/sell/seller/product/off_sale?productId=${product.productId}">下架</a>
-                    <#else>
-                               <a href="/sell/seller/product/on_sale?productId=${product.productId}">上架</a>
-                    </#if>
+                        <a href="/sell/seller/category/index?categoryId=${category.categoryId}">修改</a>
                     </td>
                 </tr>
                 </#list>
                         </tbody>
                     </table>
                 </div>
-            <#--分页组件-->
                 <div class="col-md-12 column">
                     <ul class="pagination pull-right">
             <#if currentPage lte 1>
@@ -94,24 +67,24 @@
                 </li>
             <#else>
                     <li>
-                        <a href="/sell/seller/product/list?page=${currentPage-1}"> 上一页</a>
+                        <a href="/sell/seller/category/list?page=${currentPage-1}"> 上一页</a>
                     </li>
             </#if>
-<#list 1..pageLists.getTotalPages() as index>
+<#list 1..categoryList.getTotalPages() as index>
     <#if currentPage==index>
                     <li class="disabled">
                         <a href="#"> ${index}</a>
                     </li>
     <#else>
                     <li>
-                        <a href="/sell/seller/product/list?page=${index}"> ${index}</a>
+                        <a href="/sell/seller/category/list?page=${index}"> ${index}</a>
                     </li>
     </#if>
 </#list>
- <#if currentPage gte pageLists.getTotalPages()>
+ <#if currentPage gte categoryList.getTotalPages()>
                 <li class="disabled"><a href="#">下一页</a></li>
  <#else>
- <li><a href="/sell/seller/product/list?page=${currentPage+1}">下一页</a></li>
+ <li><a href="/sell/seller/category/list?page=${currentPage+1}">下一页</a></li>
  </#if>
                     </ul>
                 </div>

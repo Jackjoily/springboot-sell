@@ -14,6 +14,7 @@ import com.jack.sell.repository.OrderDetailRepository;
 import com.jack.sell.repository.OrderMasterRepository;
 import com.jack.sell.service.OrderService;
 import com.jack.sell.service.ProductService;
+import com.jack.sell.service.WebSocket;
 import com.jack.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -45,6 +46,8 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMasterRepository orderMasterRepository;
 
+    @Autowired
+    private WebSocket webSocket;
     @Override
     @Transactional
     public OrderDto crearte(OrderDto orderDto) {
@@ -80,6 +83,9 @@ public class OrderServiceImpl implements OrderService {
         List<CartDto> cartDtoList = orderDto.getOrderDetailList().stream()
                 .map(e -> new CartDto(e.getProductId(), e.getProductQuantity())).collect(Collectors.toList());
         productService.decreaseStock(cartDtoList);
+
+           //发送websocket消息
+        webSocket.sendMessage(orderId);
         return orderDto;
     }
 

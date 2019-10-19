@@ -24,7 +24,7 @@ public class ProductInfo {
     private String productId;
     private String productName;
     private BigDecimal productPrice;
-    private Integer productStock;
+    private Integer productStock=ProductStatusEnum.UP.getCode();
     private String productDescription;
     private String productIcon;
     /**

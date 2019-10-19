@@ -14,4 +14,5 @@ import java.util.List;
 @Repository
 public interface ProductInfoRepository extends JpaRepository<ProductInfo,String> {
     List<ProductInfo> findByProductStatus(Integer status);
+    List<ProductInfo> findByCategoryType(Integer type);
 }

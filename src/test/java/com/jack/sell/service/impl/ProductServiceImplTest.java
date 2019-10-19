@@ -36,13 +36,20 @@ public class ProductServiceImplTest {
     @Test
     public void findUpall() {
         List<ProductInfo> upall = service.findUpall();
+        for (ProductInfo productInfo : upall) {
+            System.out.println(productInfo);
+        }
         assertNotEquals(0, upall.size());
     }
 
     @Test
     public void findAll() {
-        PageRequest pageRequest=new PageRequest(0,2);
+        PageRequest pageRequest=PageRequest.of(0,2);
         Page<ProductInfo> all = service.findAll(pageRequest);
+        for (ProductInfo productInfo : all.getContent()) {
+            System.out.println(productInfo);
+
+        }
         System.out.println(all.getTotalElements());
     }
 
@@ -67,5 +74,13 @@ public class ProductServiceImplTest {
     @Test
     public  void offSale(){
         service.offSale("123452");
+    }
+
+    @Test
+    public  void up(){
+        List<ProductInfo> byCategotyType = service.findByCategotyType(1);
+        for (ProductInfo productInfo : byCategotyType) {
+            System.out.println(productInfo);
+        }
     }
 }

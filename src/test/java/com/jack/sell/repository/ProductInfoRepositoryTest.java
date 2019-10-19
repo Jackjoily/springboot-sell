@@ -47,7 +47,5 @@ public class ProductInfoRepositoryTest {
     public void findByProductId() {
         ProductInfo productInfo = repository.findById("123456").get();
         System.out.println(productInfo);
-
-
     }
 }

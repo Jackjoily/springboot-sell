@@ -21,6 +21,11 @@ public interface ProductService {
     List<ProductInfo> findUpall();
     Page<ProductInfo> findAll(Pageable pageable);
     ProductInfo save(ProductInfo productInfo);
+    List<ProductInfo> findByCategotyType(Integer type
+
+
+    );
+
     //加库存
     void increaseStock(List<CartDto> cartDtoList);
 

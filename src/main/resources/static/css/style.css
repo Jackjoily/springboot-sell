@@ -1,6 +1,7 @@
 body {
   position: relative;
   overflow-x: hidden;
+ background-color: #F1F2F4;
 }
 body,
 html {

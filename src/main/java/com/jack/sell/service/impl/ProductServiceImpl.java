@@ -43,14 +43,17 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Page<ProductInfo> findAll(Pageable pageable) {
-        ProductInfo productInfo = new ProductInfo();
-        Example<ProductInfo> example = Example.of(productInfo);
-        return repository.findAll(example, pageable);
+        return repository.findAll(pageable);
     }
 
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return repository.save(productInfo);
+    }
+
+    @Override
+    public List<ProductInfo> findByCategotyType(Integer type) {
+        return repository.findByCategoryType(type);
     }
 
     @Override

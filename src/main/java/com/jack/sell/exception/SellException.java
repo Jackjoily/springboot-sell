@@ -1,12 +1,15 @@
 package com.jack.sell.exception;
 
 import com.jack.sell.enums.ResultEnum;
+import lombok.Getter;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @author jackjoily
  * @time ${Date}
  * @Description
  **/
+@Getter
 public class SellException extends RuntimeException {
     private Integer code;
 
